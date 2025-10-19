@@ -49,11 +49,11 @@ O projeto PruebaEurofirms.Tests contém testes unitários que cobrem Handlers de
 
 ## Base de Dados e Seeding
 
-A base de dados inicializa com um utilizador admin:
-Username: admin
-Password: admin
-Este utilizador deve ser utilizado para efetuar login no endpoint /api/auth/login. O token gerado deve ser incluído com o prefixo bearer nos requests subsequentes para permitir acesso aos endpoints protegidos.  
-Importante: Esta autenticação JWT foi criada apenas para simular um fluxo de token simples e não representa segurança real. Não deve ser utilizada em ambientes de produção.
+- A base de dados inicializa com um utilizador admin:
+  - Username: admin
+  - Password: admin
+- Este utilizador deve ser utilizado para efetuar login no endpoint /api/auth/login. O token gerado deve ser incluído com o prefixo bearer nos requests subsequentes para permitir acesso aos endpoints protegidos.  
+**Importante: Esta autenticação JWT foi criada apenas para simular um fluxo de token simples e não representa segurança real. Não deve ser utilizada em ambientes de produção.**
 
 ## Tecnologias Utilizadas
 
