@@ -2,41 +2,42 @@
 
 ![.NET](https://img.shields.io/badge/.NET-8.0-blue) ![SQLite](https://img.shields.io/badge/Database-SQLite-orange) ![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-green)
 
-Esta È a **Eurofirms Test API**, uma API de demonstraÁ„o que permite consultar e gerir informaÁıes de personagens e episÛdios do universo Rick and Morty.
+Esta √© a **Eurofirms Test API**, uma API de demonstra√ß√£o que permite consultar e gerir informa√ß√µes de personagens e epis√≥dios do universo Rick and Morty.
 
-Foi desenvolvida em **.NET 8** com **ASP.NET Core**, utilizando **Entity Framework Core** para persistÍncia de dados, **Identity Framework** para gest„o de utilizadores e **JWT** para autenticaÁ„o simples.
+Foi desenvolvida em **.NET 8** com **ASP.NET Core**, utilizando **Entity Framework Core** para persist√™ncia de dados, **Identity Framework** para gest√£o de utilizadores e **JWT** para autentica√ß√£o simples.
 
 ## Estrutura do Projeto
 
-- `PruebaEurofirms.Api`: Projeto da API que expıe os endpoints REST.
-- `PruebaEurofirms.Domain`: ContÈm as entidades e o `DbContext`.
-- `PruebaEurofirms.Infrastructure`: ImplementaÁıes de repositÛrios, handlers e clientes HTTP.
-- `PruebaEurofirms.Tests`: Testes unit·rios dos handlers e repositÛrios.
+- `PruebaEurofirms.Api`: Projeto da API que exp√µe os endpoints REST.
+- `PruebaEurofirms.Domain`: Cont√©m as entidades e o `DbContext`.
+- `PruebaEurofirms.Infrastructure`: Implementa√ß√µes de reposit√≥rios, handlers e clientes HTTP.
+- `PruebaEurofirms.Tests`: Testes unit√°rios dos handlers e reposit√≥rios.
 
 ## Endpoints
 
-### AutenticaÁ„o
+### Autentica√ß√£o
 
 #### POST /api/auth/login
-Request Body:
+- Request Body:
 {
   "username": "admin",
   "password": "admin"
 }
-Response 200 OK:
+- Response 200 OK:
 {
   "token": "<JWT token>"
 }
-Response 401 Unauthorized:
+- Response 401 Unauthorized:
 {
   "message": "Invalid username or password"
 }
-ObservaÁıes: O token deve ser incluÌdo nos requests subsequentes com o prefixo bearer no header Authorization. Exemplo: Authorization: bearer <token>
+
+*Observa√ß√µes*: O token deve ser inclu√≠do nos requests subsequentes com o prefixo bearer no header Authorization. Exemplo: Authorization: bearer <token>
 
 ### Personagens
 
 #### GET /api/characters
-Request: AutenticaÁ„o requerida (JWT). Query Parameters (opcional): status (Alive, Dead, Unknown)
+Request: Autentica√ß√£o requerida (JWT). Query Parameters (opcional): status (Alive, Dead, Unknown)
 Response 200 OK:
 [
   {
@@ -49,7 +50,7 @@ Response 200 OK:
 ]
 
 #### GET /api/characters/{id}
-Request: AutenticaÁ„o requerida (JWT)
+Request: Autentica√ß√£o requerida (JWT)
 Response 200 OK:
 {
   "id": 1,
@@ -63,10 +64,10 @@ Response 404 Not Found:
   "message": "Character not found"
 }
 
-### EpisÛdios
+### Epis√≥dios
 
 #### GET /api/episodes
-Request: AutenticaÁ„o requerida (JWT)
+Request: Autentica√ß√£o requerida (JWT)
 Response 200 OK:
 [
   {
@@ -78,7 +79,7 @@ Response 200 OK:
 ]
 
 #### GET /api/episodes/{id}
-Request: AutenticaÁ„o requerida (JWT)
+Request: Autentica√ß√£o requerida (JWT)
 Response 200 OK:
 {
   "id": 1,
@@ -93,19 +94,19 @@ Response 404 Not Found:
 
 ## Fluxo da API
 
-O utilizador realiza login atravÈs do endpoint /api/auth/login. Recebe um JWT token, que deve ser incluÌdo no header Authorization com o prefixo bearer. Com o token v·lido, o utilizador pode aceder aos endpoints de characters e episodes. Todos os endpoints protegidos verificam o JWT antes de processar o request.
+O utilizador realiza login atrav√©s do endpoint /api/auth/login. Recebe um JWT token, que deve ser inclu√≠do no header Authorization com o prefixo bearer. Com o token v√°lido, o utilizador pode aceder aos endpoints de characters e episodes. Todos os endpoints protegidos verificam o JWT antes de processar o request.
 
 ## Unit Tests
 
-O projeto PruebaEurofirms.Tests contÈm testes unit·rios que cobrem Handlers de comandos e queries (MediatR), RepositÛrios (CharacterRepository, EpisodeRepository) e testes de validaÁ„o de mapeamentos DTO. Estes testes garantem que a lÛgica de negÛcio funciona corretamente de forma isolada, sem necessidade de aceder ‡ base de dados real.
+O projeto PruebaEurofirms.Tests cont√©m testes unit√°rios que cobrem Handlers de comandos e queries (MediatR), Reposit√≥rios (CharacterRepository, EpisodeRepository) e testes de valida√ß√£o de mapeamentos DTO. Estes testes garantem que a l√≥gica de neg√≥cio funciona corretamente de forma isolada, sem necessidade de aceder √† base de dados real.
 
 ## Base de Dados e Seeding
 
 A base de dados inicializa com um utilizador admin:
 Username: admin
 Password: admin
-Este utilizador deve ser utilizado para efetuar login no endpoint /api/auth/login. O token gerado deve ser incluÌdo com o prefixo bearer nos requests subsequentes para permitir acesso aos endpoints protegidos.  
-Importante: Esta autenticaÁ„o JWT foi criada apenas para simular um fluxo de token simples e n„o representa seguranÁa real. N„o deve ser utilizada em ambientes de produÁ„o.
+Este utilizador deve ser utilizado para efetuar login no endpoint /api/auth/login. O token gerado deve ser inclu√≠do com o prefixo bearer nos requests subsequentes para permitir acesso aos endpoints protegidos.  
+Importante: Esta autentica√ß√£o JWT foi criada apenas para simular um fluxo de token simples e n√£o representa seguran√ßa real. N√£o deve ser utilizada em ambientes de produ√ß√£o.
 
 ## Tecnologias Utilizadas
 
