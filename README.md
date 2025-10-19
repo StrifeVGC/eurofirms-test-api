@@ -2,110 +2,58 @@
 
 ![.NET](https://img.shields.io/badge/.NET-8.0-blue) ![SQLite](https://img.shields.io/badge/Database-SQLite-orange) ![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-green)
 
-Esta é a **Eurofirms Test API**, uma API de demonstração que permite consultar e gerir informações de personagens e episódios do universo Rick and Morty.
+Esta Ã© a **Eurofirms Test API**, uma API de demonstraÃ§Ã£o que permite consultar e gerir informaÃ§Ãµes de personagens e episÃ³dios do universo Rick and Morty.
 
-Foi desenvolvida em **.NET 8** com **ASP.NET Core**, utilizando **Entity Framework Core** para persistência de dados, **Identity Framework** para gestão de utilizadores e **JWT** para autenticação simples.
+Foi desenvolvida em **.NET 8** com **ASP.NET Core**, utilizando **Entity Framework Core** para persistÃªncia de dados, **Identity Framework** para gestÃ£o de utilizadores e **JWT** para autenticaÃ§Ã£o simples.
 
 ## Estrutura do Projeto
 
-- `PruebaEurofirms.Api`: Projeto da API que expõe os endpoints REST.
-- `PruebaEurofirms.Domain`: Contém as entidades e o `DbContext`.
-- `PruebaEurofirms.Infrastructure`: Implementações de repositórios, handlers e clientes HTTP.
-- `PruebaEurofirms.Tests`: Testes unitários dos handlers e repositórios.
+- `PruebaEurofirms.Api`: Projeto da API que expÃµe os endpoints REST.
+- `PruebaEurofirms.Domain`: ContÃ©m as entidades e o `DbContext`.
+- `PruebaEurofirms.Infrastructure`: ImplementaÃ§Ãµes de repositÃ³rios, handlers e clientes HTTP.
+- `PruebaEurofirms.Tests`: Testes unitÃ¡rios dos handlers e repositÃ³rios.
 
 ## Endpoints
 
-### Autenticação
+### AutenticaÃ§Ã£o
 
 #### POST /api/auth/login
-Request Body:
-{
-  "username": "admin",
-  "password": "admin"
-}
-Response 200 OK:
-{
-  "token": "<JWT token>"
-}
-Response 401 Unauthorized:
-{
-  "message": "Invalid username or password"
-}
-Observações: O token deve ser incluído nos requests subsequentes com o prefixo bearer no header Authorization. Exemplo: Authorization: bearer <token>
+- Fornece um token jwt (Utilizar username: admin e password: admin)
 
-### Personagens
+*ObservaÃ§Ãµes*: O token deve ser incluÃ­do nos requests subsequentes com o prefixo bearer no header Authorization. Exemplo: Authorization: bearer <token>
 
-#### GET /api/characters
-Request: Autenticação requerida (JWT). Query Parameters (opcional): status (Alive, Dead, Unknown)
-Response 200 OK:
-[
-  {
-    "id": 1,
-    "name": "Rick Sanchez",
-    "status": "Alive",
-    "species": "Human",
-    "gender": "Male"
-  }
-]
+### RickAndMorty
 
-#### GET /api/characters/{id}
-Request: Autenticação requerida (JWT)
-Response 200 OK:
-{
-  "id": 1,
-  "name": "Rick Sanchez",
-  "status": "Alive",
-  "species": "Human",
-  "gender": "Male"
-}
-Response 404 Not Found:
-{
-  "message": "Character not found"
-}
+#### GET /api/RickAndMorty/import
+- Importa todas as characters da Rick and Morty API e adiciona as nÃ£o existentes.
+- retorna:
+  - 200, Retorna contagem de personagens inseridas
+  - 500, Mensagem de erro caso algo tenha acontecido (500)
 
-### Episódios
+#### GET /api/RickAndMorty/{status}
+- Request: AutenticaÃ§Ã£o requerida (JWT)
+- Passar Status (Alive, Dead, ou Unknown) para filtrar pelos status. Case insensitive.
+- retorna:
+  - 200, Lista de characters do status requisitado
+  - 400, caso o status dado seja invÃ¡lido
+  - 500, caso aconteÃ§a um erro inesperado
 
-#### GET /api/episodes
-Request: Autenticação requerida (JWT)
-Response 200 OK:
-[
-  {
-    "id": 1,
-    "name": "Pilot",
-    "air_date": "December 2, 2013",
-    "episode": "S01E01"
-  }
-]
-
-#### GET /api/episodes/{id}
-Request: Autenticação requerida (JWT)
-Response 200 OK:
-{
-  "id": 1,
-  "name": "Pilot",
-  "air_date": "December 2, 2013",
-  "episode": "S01E01"
-}
-Response 404 Not Found:
-{
-  "message": "Episode not found"
-}
-
-## Fluxo da API
-
-O utilizador realiza login através do endpoint /api/auth/login. Recebe um JWT token, que deve ser incluído no header Authorization com o prefixo bearer. Com o token válido, o utilizador pode aceder aos endpoints de characters e episodes. Todos os endpoints protegidos verificam o JWT antes de processar o request.
-
-## Unit Tests
-
-O projeto PruebaEurofirms.Tests contém testes unitários que cobrem Handlers de comandos e queries (MediatR), Repositórios (CharacterRepository, EpisodeRepository) e testes de validação de mapeamentos DTO. Estes testes garantem que a lógica de negócio funciona corretamente de forma isolada, sem necessidade de aceder à base de dados real.
+#### DELETE /api/RickAndMorty/{apiId}
+- Request: AutenticaÃ§Ã£o requerida (JWT)
+- Passar o ApiId da character que queremos apagar
+- retorna:
+  - 200, caso a character tenha sido apagada com sucesso.
+  - 404, caso a character nÃ£o tenha sido encontrada.
+  - 500, caso tenha acontecido um erro inesperado
+O projeto PruebaEurofirms.Tests contÃ©m testes unitÃ¡rios que cobrem Handlers de comandos e queries (MediatR), e testes de validaÃ§Ã£o de mapeamentos DTO. Estes testes garantem que a lÃ³gica de negÃ³cio funciona corretamente de forma isolada, sem necessidade de aceder Ã  base de dados real.
 
 ## Base de Dados e Seeding
 
 A base de dados inicializa com um utilizador admin:
 Username: admin
 Password: admin
-Este utilizador deve ser utilizado para efetuar login no endpoint /api/auth/login. O token gerado deve ser incluído com o prefixo bearer nos requests subsequentes para permitir acesso aos endpoints protegidos.  
-Importante: Esta autenticação JWT foi criada apenas para simular um fluxo de token simples e não representa segurança real. Não deve ser utilizada em ambientes de produção.
+Este utilizador deve ser utilizado para efetuar login no endpoint /api/auth/login. O token gerado deve ser incluÃ­do com o prefixo bearer nos requests subsequentes para permitir acesso aos endpoints protegidos.  
+Importante: Esta autenticaÃ§Ã£o JWT foi criada apenas para simular um fluxo de token simples e nÃ£o representa seguranÃ§a real. NÃ£o deve ser utilizada em ambientes de produÃ§Ã£o.
 
 ## Tecnologias Utilizadas
 
