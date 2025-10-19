@@ -18,87 +18,34 @@ Foi desenvolvida em **.NET 8** com **ASP.NET Core**, utilizando **Entity Framewo
 ### Autenticação
 
 #### POST /api/auth/login
-- Request Body:
-{
-  "username": "admin",
-  "password": "admin"
-}
-- Response 200 OK:
-{
-  "token": "<JWT token>"
-}
-- Response 401 Unauthorized:
-{
-  "message": "Invalid username or password"
-}
+- Fornece um token jwt (Utilizar username: admin e password: admin)
 
 *Observações*: O token deve ser incluído nos requests subsequentes com o prefixo bearer no header Authorization. Exemplo: Authorization: bearer <token>
 
-### Personagens
+### RickAndMorty
 
-#### GET /api/characters
-Request: Autenticação requerida (JWT). Query Parameters (opcional): status (Alive, Dead, Unknown)
-Response 200 OK:
-[
-  {
-    "id": 1,
-    "name": "Rick Sanchez",
-    "status": "Alive",
-    "species": "Human",
-    "gender": "Male"
-  }
-]
+#### GET /api/RickAndMorty/import
+- Importa todas as characters da Rick and Morty API e adiciona as não existentes.
+- retorna:
+  - 200, Retorna contagem de personagens inseridas
+  - 500, Mensagem de erro caso algo tenha acontecido (500)
 
-#### GET /api/characters/{id}
-Request: Autenticação requerida (JWT)
-Response 200 OK:
-{
-  "id": 1,
-  "name": "Rick Sanchez",
-  "status": "Alive",
-  "species": "Human",
-  "gender": "Male"
-}
-Response 404 Not Found:
-{
-  "message": "Character not found"
-}
+#### GET /api/RickAndMorty/{status}
+- Request: Autenticação requerida (JWT)
+- Passar Status (Alive, Dead, ou Unknown) para filtrar pelos status. Case insensitive.
+- retorna:
+  - 200, Lista de characters do status requisitado
+  - 400, caso o status dado seja inválido
+  - 500, caso aconteça um erro inesperado
 
-### Episódios
-
-#### GET /api/episodes
-Request: Autenticação requerida (JWT)
-Response 200 OK:
-[
-  {
-    "id": 1,
-    "name": "Pilot",
-    "air_date": "December 2, 2013",
-    "episode": "S01E01"
-  }
-]
-
-#### GET /api/episodes/{id}
-Request: Autenticação requerida (JWT)
-Response 200 OK:
-{
-  "id": 1,
-  "name": "Pilot",
-  "air_date": "December 2, 2013",
-  "episode": "S01E01"
-}
-Response 404 Not Found:
-{
-  "message": "Episode not found"
-}
-
-## Fluxo da API
-
-O utilizador realiza login através do endpoint /api/auth/login. Recebe um JWT token, que deve ser incluído no header Authorization com o prefixo bearer. Com o token válido, o utilizador pode aceder aos endpoints de characters e episodes. Todos os endpoints protegidos verificam o JWT antes de processar o request.
-
-## Unit Tests
-
-O projeto PruebaEurofirms.Tests contém testes unitários que cobrem Handlers de comandos e queries (MediatR), Repositórios (CharacterRepository, EpisodeRepository) e testes de validação de mapeamentos DTO. Estes testes garantem que a lógica de negócio funciona corretamente de forma isolada, sem necessidade de aceder à base de dados real.
+#### DELETE /api/RickAndMorty/{apiId}
+- Request: Autenticação requerida (JWT)
+- Passar o ApiId da character que queremos apagar
+- retorna:
+  - 200, caso a character tenha sido apagada com sucesso.
+  - 404, caso a character não tenha sido encontrada.
+  - 500, caso tenha acontecido um erro inesperado
+O projeto PruebaEurofirms.Tests contém testes unitários que cobrem Handlers de comandos e queries (MediatR), e testes de validação de mapeamentos DTO. Estes testes garantem que a lógica de negócio funciona corretamente de forma isolada, sem necessidade de aceder à base de dados real.
 
 ## Base de Dados e Seeding
 
