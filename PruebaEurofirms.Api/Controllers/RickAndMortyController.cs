@@ -70,6 +70,9 @@ namespace PruebaEurofirms.Controllers
         /// <response code="400">Returned if the status provided is invalid.</response>
         /// <response code="500">Returned if an unexpected error occurs.</response>
         [HttpGet("status")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetCharactersByStatus([FromQuery] string status)
         {
             try
@@ -114,25 +117,53 @@ namespace PruebaEurofirms.Controllers
         /// <returns>Success message in case the character was deleted</returns>
         /// <response code="200">Character deleted successfully</response>
         /// <response code="404">Character not found</response>
+        /// <response code="500">unexpected error occurred</response>
+
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
+
         public async Task<IActionResult> DeleteCharacter(int id)
         {
-            var deleted = await _mediator.Send(new DeleteCharacterCommand(id));
-
-            if (!deleted)
+            try
             {
-                return NotFound(new
+                _logger.LogInformation("Attempting to delete character with Id: {CharacterId}", id);
+
+                var deleted = await _mediator.Send(new DeleteCharacterCommand(id));
+
+                if (!deleted)
                 {
-                    message = "Character not found"
+                    _logger.LogWarning("Character with Id {CharacterId} not found", id);
+                    return NotFound(new
+                    {
+                        message = "Character not found"
+                    });
+                }
+
+                _logger.LogInformation("Character with Id {CharacterId} deleted successfully", id);
+
+                return Ok(new
+                {
+                    message = "Character deleted successfully"
                 });
             }
-
-            return Ok(new
+            catch (KeyNotFoundException ex)
             {
-                message = "Character deleted successfully"
-            });
+                _logger.LogError(ex, "Character with Id {CharacterId} not found", id);
+                return NotFound(new
+                {
+                    message = $"Character with Id {id} not found"
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An unexpected error occurred while deleting character with Id {CharacterId}", id);
+                return StatusCode(500, new
+                {
+                    message = "An unexpected error occurred while deleting the character. Please try again later."
+                });
+            }
         }
     }
 }
