@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PruebaEurofirms.Infrastructure.Handlers;
 
@@ -8,6 +9,7 @@ namespace PruebaEurofirms.Controllers
     /// The controller for Rick and Morty characters.
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class RickAndMortyController : ControllerBase

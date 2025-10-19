@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PruebaEurofirms.Domain.Entities;
 
 namespace PruebaEurofirms.Domain;
@@ -6,7 +8,7 @@ namespace PruebaEurofirms.Domain;
 /// <summary>
 ///   The Db Context for the Eurofirms database.
 /// </summary>
-public class EurofirmsDbContext : DbContext
+public class EurofirmsDbContext : IdentityDbContext<ApplicationUser>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="EurofirmsDbContext"/> class.
@@ -52,5 +54,22 @@ public class EurofirmsDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(EurofirmsDbContext).Assembly);
+
+        // Seed admin user
+        var hasher = new PasswordHasher<ApplicationUser>();
+        var adminUser = new ApplicationUser
+        {
+            Id = "1",
+            UserName = "admin",
+            NormalizedUserName = "ADMIN",
+            Email = "admin@test.com",
+            NormalizedEmail = "ADMIN@TEST.COM",
+            EmailConfirmed = true,
+            SecurityStamp = "DUMMY-STATIC-GUID-1234",
+            ConcurrencyStamp = "DUMMY-CONCURRENCY-1234",
+            PasswordHash = "AQAAAAIAAYagAAAAEGBDJkwroU6pBG7j6+RLN2Z19Oiez4soflNJ02eoL5LDe0xMBfmnMd7mBulQL6sJCA=="
+        };
+
+        modelBuilder.Entity<ApplicationUser>().HasData(adminUser);
     }
 }

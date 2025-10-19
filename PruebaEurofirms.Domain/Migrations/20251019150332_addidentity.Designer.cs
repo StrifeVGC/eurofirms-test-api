@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PruebaEurofirms.Domain;
 
@@ -10,9 +11,11 @@ using PruebaEurofirms.Domain;
 namespace PruebaEurofirms.Domain.Migrations
 {
     [DbContext(typeof(EurofirmsDbContext))]
-    partial class EurofirmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251019150332_addidentity")]
+    partial class addidentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.10");

@@ -4,6 +4,35 @@
         <name>PruebaEurofirms.Api</name>
     </assembly>
     <members>
+        <member name="T:AuthController">
+            <summary>
+            Controller responsible for authentication.
+            </summary>
+        </member>
+        <member name="F:AuthController._userManager">
+            <summary>
+            The user manager from Identity framework.
+            </summary>
+        </member>
+        <member name="F:AuthController._configuration">
+            <summary>
+            The configuration to read JwtKey.
+            </summary>
+        </member>
+        <member name="M:AuthController.#ctor(Microsoft.AspNetCore.Identity.UserManager{PruebaEurofirms.Domain.Entities.ApplicationUser},Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AuthController"/> class.
+            </summary>
+            <param name="userManager">The user manager.</param>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="M:AuthController.Login(PruebaEurofirms.Api.Models.LoginRequest)">
+            <summary>
+            Logins the specified request.
+            </summary>
+            <param name="request">The request.</param>
+            <returns></returns>
+        </member>
         <member name="T:PruebaEurofirms.Controllers.RickAndMortyController">
             <summary>
             The controller for Rick and Morty characters.
@@ -43,6 +72,27 @@
             <returns>Success message in case the character was deleted</returns>
             <response code="200">Character deleted successfully</response>
             <response code="404">Character not found</response>
+        </member>
+        <member name="T:PruebaEurofirms.Api.Models.LoginRequest">
+            <summary>
+            Login request model.
+            </summary>
+        </member>
+        <member name="P:PruebaEurofirms.Api.Models.LoginRequest.Username">
+            <summary>
+            Gets or sets the username.
+            </summary>
+            <value>
+            The username.
+            </value>
+        </member>
+        <member name="P:PruebaEurofirms.Api.Models.LoginRequest.Password">
+            <summary>
+            Gets or sets the password.
+            </summary>
+            <value>
+            The password.
+            </value>
         </member>
         <member name="T:CharacterStatusValidator">
             <summary>
