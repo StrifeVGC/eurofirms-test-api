@@ -1,0 +1,14 @@
+C:\Users\Vasco\Desktop\PruebaEurofirms\PruebaEurofirms.Domain\bin\Debug\net8.0\PruebaEurofirms.Domain.deps.json
+C:\Users\Vasco\Desktop\PruebaEurofirms\PruebaEurofirms.Domain\bin\Debug\net8.0\PruebaEurofirms.Domain.runtimeconfig.json
+C:\Users\Vasco\Desktop\PruebaEurofirms\PruebaEurofirms.Domain\bin\Debug\net8.0\PruebaEurofirms.Domain.dll
+C:\Users\Vasco\Desktop\PruebaEurofirms\PruebaEurofirms.Domain\bin\Debug\net8.0\PruebaEurofirms.Domain.pdb
+C:\Users\Vasco\Desktop\PruebaEurofirms\PruebaEurofirms.Domain\obj\Debug\net8.0\PruebaEurofirms.Domain.csproj.AssemblyReference.cache
+C:\Users\Vasco\Desktop\PruebaEurofirms\PruebaEurofirms.Domain\obj\Debug\net8.0\PruebaEurofirms.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Vasco\Desktop\PruebaEurofirms\PruebaEurofirms.Domain\obj\Debug\net8.0\PruebaEurofirms.Domain.AssemblyInfoInputs.cache
+C:\Users\Vasco\Desktop\PruebaEurofirms\PruebaEurofirms.Domain\obj\Debug\net8.0\PruebaEurofirms.Domain.AssemblyInfo.cs
+C:\Users\Vasco\Desktop\PruebaEurofirms\PruebaEurofirms.Domain\obj\Debug\net8.0\PruebaEurofirms.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Vasco\Desktop\PruebaEurofirms\PruebaEurofirms.Domain\obj\Debug\net8.0\PruebaEurofirms.Domain.dll
+C:\Users\Vasco\Desktop\PruebaEurofirms\PruebaEurofirms.Domain\obj\Debug\net8.0\refint\PruebaEurofirms.Domain.dll
+C:\Users\Vasco\Desktop\PruebaEurofirms\PruebaEurofirms.Domain\obj\Debug\net8.0\PruebaEurofirms.Domain.pdb
+C:\Users\Vasco\Desktop\PruebaEurofirms\PruebaEurofirms.Domain\obj\Debug\net8.0\PruebaEurofirms.Domain.genruntimeconfig.cache
+C:\Users\Vasco\Desktop\PruebaEurofirms\PruebaEurofirms.Domain\obj\Debug\net8.0\ref\PruebaEurofirms.Domain.dll
