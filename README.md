@@ -53,7 +53,7 @@ O projeto PruebaEurofirms.Tests contém testes unitários que cobrem Handlers de
   - Username: admin
   - Password: admin
 - Este utilizador deve ser utilizado para efetuar login no endpoint /api/auth/login. O token gerado deve ser incluído com o prefixo bearer nos requests subsequentes para permitir acesso aos endpoints protegidos.  
-**Importante: Esta autenticação JWT foi criada apenas para simular um fluxo de token simples e não representa segurança real. Não deve ser utilizada em ambientes de produção.**
+- **Importante: Esta autenticação JWT foi criada apenas para simular um fluxo de token simples e não representa segurança real. Não deve ser utilizada em ambientes de produção.**
 
 ## Tecnologias Utilizadas
 
