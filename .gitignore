@@ -28,12 +28,15 @@
 *.so.*
 *.dylib
 
+<<<<<<< HEAD
 # Visual Studio
 .vs/
 *.user
 *.suo
 *.sln.docstates
 
+=======
+>>>>>>> c597cf0829ecae1abba832cdd014b0fbd0fbba1b
 # Executables
 *.exe
 *.out
@@ -59,6 +62,9 @@ dkms.conf
 
 # debug information files
 *.dwo
+<<<<<<< HEAD
 
 # text files
 *.docx
+=======
+>>>>>>> c597cf0829ecae1abba832cdd014b0fbd0fbba1b
